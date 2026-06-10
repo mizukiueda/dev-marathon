@@ -1,5 +1,5 @@
 const config = {
-  apiUrl: "http://localhost:5637",
+  apiUrl: '/api_mi-ueda',
 };
 
 export default config;
