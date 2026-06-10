@@ -40,7 +40,7 @@
         document.getElementById('contact').textContent = params.get('contact');
         document.getElementById('location').textContent = params.get('location');
         document.getElementById('btn-back').addEventListener('click', function() {
-            window.location.href = '/customer/add.html';
+            window.location.href = '/mi-ueda/customer/add.html';
         });
         document.getElementById('btn-register').addEventListener('click', function() {
             fetch(config.apiUrl + '/add-customer', {
@@ -53,7 +53,7 @@
               .then(data => {
                 if (data.success) {
                     alert('顧客情報が正常に保存されました。');
-                    window.location.href = '/customer/list.html';
+                    window.location.href = '/mi-ueda/customer/list.html';
                 } else {
                     alert('保存に失敗しました。');
                 }
