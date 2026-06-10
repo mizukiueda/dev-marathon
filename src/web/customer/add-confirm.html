@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>案件情報入力</title>
-    <!-- Bootstrap CSSの読み込み -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案件情報入力</title>
+<!-- Bootstrap CSSの読み込み -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <!-- ここにHTMLを書く -->
-    </div>
-    <script type="module">
-        <!-- ここにJSを書く -->
-    </script>
-    <!-- BootstrapのJavaScriptの読み込み -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+<div class="container mt-5">
+<h2 class="mb-4">顧客情報の確認</h2>
+<table class="table table-bordered">
+<tbody>
+<tr>
+<th>会社名</th>
+<td id="companyName"></td>
+</tr>
+<tr>
+<th>業種</th>
+<td id="industry"></td>
+</tr>
+<tr>
+<th>連絡先</th>
+<td id="contact"></td>
+</tr>
+<tr>
+<th>所在地</th>
+<td id="location"></td>
+</tr>
+</tbody>
+</table>
+<button id="btn-back" class="btn btn-secondary">戻る</button>
+<button id="btn-register" class="btn btn-primary">登録する</button>
+</div>
+<script type="module">
+        import config from './config.js';
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('companyName').textContent = params.get('companyName');
+        document.getElementById('industry').textContent = params.get('industry');
+        document.getElementById('contact').textContent = params.get('contact');
+        document.getElementById('location').textContent = params.get('location');
+        document.getElementById('btn-back').addEventListener('click', function() {
+            window.location.href = '/customer/add.html';
+        });
+        document.getElementById('btn-register').addEventListener('click', function() {
+            fetch(config.apiUrl + '/add-customer', {
+                method: 'POST',
+                headers: {
+'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            }).then(response => response.json())
+              .then(data => {
